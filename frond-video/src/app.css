@@ -1,0 +1,105 @@
+
+.nav__item {
+    margin: 10px;
+    padding: 10px;
+    background-color: #411530;
+    color: #fff;
+    font-size: 20px;
+    text-decoration: none;
+
+}
+.nav__item:hover {
+    text-decoration: underline;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+}
+
+.main-form {
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-form form {
+    width: 90%;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.item {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #ccc;
+    position: relative;
+    margin: 10px;
+}
+
+.player-wrapper {
+    width: 100%;
+    position: relative;
+    padding-top: 56.25%;
+}
+
+.react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.btn-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-play {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+.input {
+    box-sizing: border-box;
+    width: 100%;
+    height: 35px;
+    font-size: 20px;
+    padding: 3px 7px;
+    margin-bottom: 10px;
+}
+.input--area {
+    height: 100%;
+}
+
+.btn {
+    width: 100%;
+    height: 35px;
+    background-color: #7A4495;
+    color: #fff;
+    font-size: 20px;
+}

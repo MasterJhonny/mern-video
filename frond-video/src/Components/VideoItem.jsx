@@ -1,10 +1,13 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player'
 import { toast } from 'react-toastify';
 
 function VideoItem({ id, name, url, create_at, setState, state}) {
 
   const date = new Date(create_at);
+
+  const nav = useNavigate();
 
   async function onDeleteVideo() {
     const options = {
@@ -13,17 +16,22 @@ function VideoItem({ id, name, url, create_at, setState, state}) {
         "Content-type": "application/json; charset=utf-8",
       },
     }
-    const res = await fetch(`http://localhost:3300/videos/${id}`, options);
-    const data = await res.json();
-    console.log(data)
-    toast.success(data.message+ ` video: ${name}`);
-    setState(state + 1)
+    try {
+      const res = await fetch(`http://localhost:3300/videos/${id}`, options);
+      const data = await res.json();
+      console.log(data)
+      toast.success(data.message+ ` video: ${name}`);
+      setState(state + 1)
+    } catch (error) {
+      console.log("ups, error: ", error)
+    }
   } 
 
 
   function onPlayer () {
-    console.log('play')
+    nav(`/view/${id}`);
   }
+  
 
   return (
     <li className="item">

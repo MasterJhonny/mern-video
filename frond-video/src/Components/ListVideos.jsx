@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { VideoItem } from './VideoItem'
+import { Title } from "./Styled.Components";
 const url = 'http://localhost:3300/videos';
 
 
-function ListVideo() {
+function ListVideo({ videos, state, setState }) {
 
-    const [videos, setVideos] = useState([]);
-    const [state, setState] = useState(1);
+    // const [videos, setVideos] = useState([]);
+    // const [state, setState] = useState(1);
 
-    const getVideos  = async () => {
-        const rta = await axios.get(url)
-        console.log(rta)
-        setVideos(rta.data)
-    }
+    // const getVideos  = async () => {
+    //     const rta = await axios.get(url)
+    //     setVideos(rta.data)
+    // }
 
-    useEffect(() => {
-        getVideos()
-    }, [])
+    // useEffect(() => {
+    //     getVideos()
+    // }, [])
 
-    useEffect(() => {
-        getVideos()
-    }, [state])
+    // useEffect(() => {
+    //     getVideos()
+    // }, [state])
 
-    console.log(videos);
     return (
-        <div className="videos">    
-            <h4>Hola</h4>
+        <div className="videos">
+            <Title>Mis videos</Title>
             <ul className="list">
                 {
                     videos.length === 0 ? 'Cargandor...' :

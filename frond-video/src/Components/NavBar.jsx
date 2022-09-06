@@ -8,6 +8,7 @@ function NavBar() {
             <NavLink className="nav__item" to="/videos">Videos</NavLink>
             <NavLink className="nav__item" to="/users">Users</NavLink>
             <NavLink className="nav__item" to="/new">Create New Video</NavLink>
+            <span className="nav-bg"></span>
         </div>
     );
 }

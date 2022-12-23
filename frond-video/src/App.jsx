@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NavBar } from "./Components/NavBar";
 import { CreateVideo } from "./Components/pages/CreateVideo";
 import { Title } from "./Components/Styled.Components";
@@ -49,9 +49,9 @@ function App() {
   return (
     <BrowserRouter>
       <Title>Videos Favoritos</Title>
-      <NavBar />
+      <NavBar videos={videos} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="/videos"/>} />
         <Route
           path="/videos"
           element={

@@ -122,6 +122,9 @@ body {
     cursor: pointer;
 }
 
+.btn-reload {
+    width: 50%;
+}
 
 .input {
     box-sizing: border-box;

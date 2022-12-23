@@ -2,31 +2,39 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player'
 import { toast } from 'react-toastify';
+import axios from "axios";
+
+import { ButtonIcon } from "./Styled.Components";
+const API_URL = 'http://localhost:3300/videos';
+const urlIconDelete = 'https://img.icons8.com/external-others-inmotus-design/344/external-Delete-round-icons-others-inmotus-design.png'
+const urlIconEdit = 'https://img.icons8.com/nolan/344/edit--v1.png';
 
 function VideoItem({ id, name, url, create_at, setState, state}) {
 
   const date = new Date(create_at);
-
   const nav = useNavigate();
 
   async function onDeleteVideo() {
-    const options = {
-      method: 'DELETE',
-      headers: {
-        "Content-type": "application/json; charset=utf-8",
-      },
-    }
-    try {
-      const res = await fetch(`http://localhost:3300/videos/${id}`, options);
-      const data = await res.json();
-      console.log(data)
-      toast.success(data.message+ ` video: ${name}`);
-      setState(state + 1)
-    } catch (error) {
-      console.log("ups, error: ", error)
+    const valor = confirm('Are you sure you want to delete?');
+    console.log(valor)
+    if (valor) {
+      const options = {
+        method: 'DELETE'
+      }
+      try {
+        const res = await axios(`${API_URL}/${id}`, options);
+        console.log(res)
+        toast.success(`${res.data.message} video: ${name}`);
+        setState(state + 1)
+      } catch (error) {
+        console.log("ups, error: ", error)
+      }
     }
   } 
 
+  function onUdadateVideo () {
+    console.log("onUdadateVideo!")
+  }
 
   function onPlayer () {
     nav(`/view/${id}`);
@@ -46,7 +54,8 @@ function VideoItem({ id, name, url, create_at, setState, state}) {
         <span className='btn-play' onClick={onPlayer} ></span>
       </div>
       <p>creado en: {date.toLocaleDateString()}</p>
-      <span className="btn-delete" onClick={onDeleteVideo}>X</span>
+      <ButtonIcon style={{ backgroundImage: `url(${urlIconDelete})`}} onClick={onDeleteVideo}></ButtonIcon>
+      <ButtonIcon style={{ backgroundImage: `url(${urlIconEdit})`, right: '42px' }} onClick={onUdadateVideo}></ButtonIcon>
     </li>
   );
 }

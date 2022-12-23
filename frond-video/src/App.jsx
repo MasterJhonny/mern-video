@@ -7,7 +7,7 @@ import { ListVideo } from "./Components/ListVideos";
 import { Player } from "./Components/pages/Player";
 
 import "./app.css";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
@@ -22,13 +22,20 @@ function Users() {
 }
 
 function App() {
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState(null);
   const [state, setState] = useState(1);
+  const [err, setErr] = useState(null);
 
   const getVideos = async () => {
-    const rta = await axios.get(url);
-    // console.log(rta)
-    setVideos(rta.data.reverse());
+    try {
+      const rta = await axios.get(url);
+      // console.log(rta)
+      setVideos(rta.data.reverse());
+    } catch (error) {
+      console.log("Ups, Error:", error);
+      toast.error(error.message);
+      setErr(error.message)
+    }
   };
 
   useEffect(() => {
@@ -48,7 +55,7 @@ function App() {
         <Route
           path="/videos"
           element={
-            <ListVideo videos={videos} state={state} setState={setState} />
+            <ListVideo videos={videos} state={state} setState={setState} err={err} setErr={setErr}/>
           }
         />
         <Route path="/users" element={<Users />} />

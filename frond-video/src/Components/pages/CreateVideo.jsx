@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -10,22 +11,19 @@ function CreateVideo({ state, setState }) {
   async function postVideo(newVideo) {
     const { name, url, description } = newVideo;
     if (name && url && description) {
-      const requestoptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+      const options = {
+        method: "post",
+        url: "http://localhost:3300/videos",
+        data: {
           name,
           url,
-          description,
-        }),
+          description
+        },
       };
+      
       try {
-        const response = await fetch(
-          "http://localhost:3300/videos",
-          requestoptions
-        );
-        const data = await response.json();
-        console.log(data);
+        const res = await axios(options);
+        console.log(res);
         toast.success("New video Added successfully");
         setState(state + 1);
         useNav("/videos");

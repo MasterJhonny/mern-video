@@ -53,4 +53,25 @@ const ErrorInput = styled.span`
     padding: 7px;
 `;
 
-export { Title, Entrada, Description, Button, ErrorInput };
+const Box = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const ButtonIcon = styled.span`
+    width: 35px;
+    height: 35px;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 90%;
+    position: absolute;
+    margin: 7px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+`;
+
+export { Title, Entrada, Description, Button, ErrorInput, Box, ButtonIcon };

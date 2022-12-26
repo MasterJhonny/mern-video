@@ -62,6 +62,9 @@ async(req, res, next) => {
         })
     } catch (error) {
         next(error);
+        res.json({
+            message: error.message,
+        })
     }
 })
 

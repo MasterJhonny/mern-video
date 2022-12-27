@@ -13,7 +13,7 @@ function NavBar() {
       <NavLink className="nav__item" to="/view/0">
         Player
       </NavLink>
-      <NavLink className="nav__item" to="/new">
+      <NavLink className="nav__item" to="/new/0">
         Create New Video
       </NavLink>
       <span className="nav-bg"></span>

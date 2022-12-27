@@ -60,7 +60,7 @@ function App() {
         />
         <Route path="/users" element={<Users />} />
         <Route
-          path="/new"
+          path="/new/:id"
           element={<CreateVideo state={state} setState={setState} />}
         />
         <Route path="/view/:id" element={<Player videos={videos} />} />

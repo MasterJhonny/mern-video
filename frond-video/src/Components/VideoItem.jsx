@@ -32,8 +32,8 @@ function VideoItem({ id, name, url, create_at, setState, state}) {
     }
   } 
 
-  function onUdadateVideo () {
-    console.log("onUdadateVideo!")
+  function onUpdateVideo () {
+    nav(`/new/${id}`);
   }
 
   function onPlayer () {
@@ -55,7 +55,7 @@ function VideoItem({ id, name, url, create_at, setState, state}) {
       </div>
       <p>creado en: {date.toLocaleDateString()}</p>
       <ButtonIcon style={{ backgroundImage: `url(${urlIconDelete})`}} onClick={onDeleteVideo}></ButtonIcon>
-      <ButtonIcon style={{ backgroundImage: `url(${urlIconEdit})`, right: '42px' }} onClick={onUdadateVideo}></ButtonIcon>
+      <ButtonIcon style={{ backgroundImage: `url(${urlIconEdit})`, right: '42px' }} onClick={onUpdateVideo}></ButtonIcon>
     </li>
   );
 }

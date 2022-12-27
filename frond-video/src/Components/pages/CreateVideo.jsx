@@ -1,32 +1,32 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { getVideosById, createVideo, updateVideo } from '../../services/serviceVideo';
 import { Entrada, Description, Button, ErrorInput } from "../Styled.Components";
 
 function CreateVideo({ state, setState }) {
   const useNav = useNavigate();
+  const { id } = useParams();
 
-  async function postVideo(newVideo) {
+  
+  async function handleRequestVideo(newVideo) {
     const { name, url, description } = newVideo;
     if (name && url && description) {
-      const options = {
-        method: "post",
-        url: "http://localhost:3300/videos",
-        data: {
-          name,
-          url,
-          description
-        },
-      };
-      
       try {
-        const res = await axios(options);
-        console.log(res);
-        toast.success("New video Added successfully");
-        setState(state + 1);
-        useNav("/videos");
+        if (Number(id)) {
+          const res = await updateVideo(newVideo, id);
+          console.log("🚀 ~ file: CreateVideo.jsx:19 ~ handleRequestVideo ~ update", res);
+          toast.success("Update video successfully");
+          setState(state + 1);
+          useNav("/videos");
+        } else {
+          const res = await createVideo(newVideo);
+          console.log("🚀 ~ file: CreateVideo.jsx:25 ~ handleRequestVideo ~ created", res);
+          toast.success("New video Added successfully");
+          setState(state + 1);
+          useNav("/videos");
+        }
       } catch (error) {
         console.log("ups, error!", error);
       }
@@ -34,20 +34,31 @@ function CreateVideo({ state, setState }) {
   }
 
   const {
-    register,
+    register, 
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
-    console.log(data);
-    postVideo(data);
+    handleRequestVideo(data);
   };
+  
+  const resetAsyncForm = useCallback(async () => {
+    const result = await getVideosById(id);
+    reset(result);
+  }, [reset]);
+
+
+  useEffect(() => {
+    if(Number(id)) {
+      resetAsyncForm();
+    }
+  }, [resetAsyncForm]);
 
   return (
     <div className="main">
       <div className="main-form">
-        <h2>New Video</h2>
+        <h2>{Number(id) ? 'Actualizar Video': 'New Video'}</h2>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Entrada
             {...register("name", {
@@ -77,7 +88,7 @@ function CreateVideo({ state, setState }) {
           </ErrorInput>
           <br />
           <br />
-          <Button type="submit">Crear</Button>
+          <Button type="submit">{Number(id) ? 'Actualizar': 'Crear'}</Button>
         </form>
       </div>
     </div>

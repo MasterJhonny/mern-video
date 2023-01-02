@@ -26,6 +26,16 @@ class VideosService {
         return rta[0];
     }
 
+    async getVideosByUserId (id) {
+        const rta = await this.pool.query('SELECT * FROM videos WHERE user_id = ?', [id]);
+        if (rta.length === 0) {
+            throw new Error('Not Found! Video');
+            return;
+        }
+        console.log(rta);
+        return rta;
+    }
+
     async update (id, changes) {
         const rta = await this.pool.query('UPDATE videos SET ? where id = ?', [changes, id]);
         const { affectedRows } = rta;

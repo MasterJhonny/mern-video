@@ -32,6 +32,20 @@ router.get('/:id',
     }
 )
 
+// find videos by user_id
+router.get('/user/:id', 
+    // validatorHandler(getVideoSchema, 'params'),
+    async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const video = await service.getVideosByUserId(id);
+            res.status(200).json(video);
+        } catch (error) {
+            next(error);
+        }
+    }
+)
+
 // create 
 router.post('/', 
     validatorHandler(createVideoSchema, 'body'),

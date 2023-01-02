@@ -4,11 +4,12 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { getVideosById, createVideo, updateVideo } from '../../services/serviceVideo';
 import { Entrada, Description, Button, ErrorInput } from "../Styled.Components";
+import { useAuth0 } from '@auth0/auth0-react';
 
 function CreateVideo({ state, setState }) {
   const useNav = useNavigate();
   const { id } = useParams();
-
+  const { user } = useAuth0();
   
   async function handleRequestVideo(newVideo) {
     const { name, url, description } = newVideo;
@@ -21,6 +22,7 @@ function CreateVideo({ state, setState }) {
           setState(state + 1);
           useNav("/videos");
         } else {
+          newVideo.user_id = user.sub;
           const res = await createVideo(newVideo);
           console.log("🚀 ~ file: CreateVideo.jsx:25 ~ handleRequestVideo ~ created", res);
           toast.success("New video Added successfully");

@@ -23,13 +23,20 @@ const createVideo = async (data) => {
 };
 
 const updateVideo = async (data, id) => {
-    const options = {
-      method: "patch",
-      url: `${URL_BASE_VIDEO}/${id}`,
-      data: data
-    };
-    const rta = await axios(options);
-    return rta.data;
+  const options = {
+    method: "patch",
+    url: `${URL_BASE_VIDEO}/${id}`,
+    data: data
   };
+  const rta = await axios(options);
+  return rta.data;
+};
 
-export { getVideosById, createVideo, updateVideo };
+const getVideosByUserId = async (userId) => {
+  const url = `${URL_BASE_VIDEO}/user/${userId}`;
+  const rta = await axios.get(url);
+  console.log("🚀 ~ file: serviceVideo.js:38 ~ getVideosByUserId ~ rta", rta)
+  return rta.data;
+};
+
+export { getVideosById, createVideo, updateVideo, getVideosByUserId };

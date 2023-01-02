@@ -74,4 +74,19 @@ const ButtonIcon = styled.span`
     cursor: pointer;
 `;
 
-export { Title, Entrada, Description, Button, ErrorInput, Box, ButtonIcon };
+const Container = styled.div`
+    width: 100%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Avatar = styled.img`
+    width: 180px;
+    height: 180px;
+    border-radius: 90px;
+    object-fit: cover;
+`;
+
+export { Title, Entrada, Description, Button, ErrorInput, Box, ButtonIcon, Container, Avatar };
